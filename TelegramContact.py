@@ -12,7 +12,7 @@ class TelContact:
     # argv[1] contain the api_key of the bot
     # NGROK is used to make the server public
     TELEGRAM_INIT_WEBHOOK_URL = 'https://api.telegram.org/bot{}' \
-                                '/setWebhook?url=https://7834-79-179-181-57.eu.ngrok.io'.format(sys.argv[1])
+                                '/setWebhook?url=https://88bd-79-179-181-57.eu.ngrok.io'.format(sys.argv[1])
     app = Flask(__name__)
 
     @staticmethod
