@@ -22,6 +22,5 @@ class TelUploadFile:
             with open(file_pathh.split("/")[-1], "wb") as f:
                 f.write(file_content)
             return file_pathh.split("/")[-1]
-        except :
+        except:
             return 'Failed to find image on server'
-
