@@ -16,4 +16,4 @@ class QrDecoder:
             data = qr_code.data.decode("utf-8")  # Extracts information about decode data from decode object
             return data
         except:
-            return "fail reading image"
+            return "Failed to read image"

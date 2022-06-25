@@ -38,10 +38,12 @@ class TelContact:
             img = upload_file.get_image()
             qr = QrDecoder(img)
             data = qr.decode()
-            if data == 'fail reading image':  # can not decode the QR image
-                bitcoin_addresses = [data]
-            else:
+            if "bitcoin" in data:
                 bitcoin_addresses = [data.split(":")[1]]
+            elif data == "Failed to read image":  # can not decode the QR image
+                bitcoin_addresses = [data]
+            else:  # Proper QR code but not of Bitcoin
+                bitcoin_addresses = ["This is not a wallet code"]
             # delete the photo file
             os.remove(img)
         else:  # 'text' in message:
@@ -53,7 +55,7 @@ class TelContact:
         for address in bitcoin_addresses:
             bit_info = BitAddressInfo(address)
             res = bit_info.get_balance()
-            if address == 'fail reading image':
+            if address == "Failed to read image" or address == "This is not a wallet code":
                 res = ""
             response = requests.get("https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}"
                                     .format(sys.argv[1], chat_id, address + "\n\n" + res))
